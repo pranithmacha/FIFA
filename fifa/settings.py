@@ -93,10 +93,7 @@ if ENV == "PROD":
     print("setting prod settings...")
     SECRET_KEY = os.environ.get("SECRET_KEY")
     DEBUG = os.environ.get("DEBUG") == "True"
-    print("type of debug is", type(DEBUG))
-    print(DEBUG)
     ALLOWED_HOSTS = [host for host in os.environ.get("ALLOWED_HOSTS").split(",")]
-    print(ALLOWED_HOSTS)
-    print(type(ALLOWED_HOSTS))
+
 
 
