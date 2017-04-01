@@ -79,12 +79,10 @@ USE_L10N = True
 
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.8/howto/static-files/
-
+# STATIC FILES
 STATIC_URL = '/static/'
-
+STATIC_URL = '/static/'
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'staticfiles'),)
 
 try:
     from fifa.local_settings import *
@@ -92,6 +90,7 @@ except ImportError:
     print("could not find local settings")
 
 if ENV == "PROD":
+    print("setting prod settings...")
     SECRET_KEY = os.environ.get("SECRET_KEY")
     DEBUG = os.environ.get("DEBUG")
 
