@@ -1,5 +1,5 @@
-# FIFA
-simple app to create FIFA tournaments with friends
+# FIFA - 
+simple app to create FIFA tournaments with friends. Planning this to be a Python Flask app with Angular JS and Mongo DB. App will start off as a Django app at first(just so that I can finish it ASAP) and planning to be converted to a Flask app later
 
 
 =============
