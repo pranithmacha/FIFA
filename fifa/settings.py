@@ -95,4 +95,5 @@ if ENV == "PROD":
     DEBUG = os.environ.get("DEBUG")
     ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS")
     print("setting DEBUG to {0}".format(DEBUG))
+    print("setting ALLOWED_HOSTS to {0}".format(ALLOWED_HOSTS))
 
