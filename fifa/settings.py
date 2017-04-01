@@ -93,4 +93,5 @@ if ENV == "PROD":
     print("setting prod settings...")
     SECRET_KEY = os.environ.get("SECRET_KEY")
     DEBUG = os.environ.get("DEBUG")
+    print("setting DEBUG to {0}".format(DEBUG))
 
