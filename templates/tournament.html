@@ -1,1 +1,50 @@
-hello
+<md-content>
+	<p class="md-title" layout="column" layout-align="center center"> Please select the match you want to play</p>
+	<br><br>
+	<div layout="row" layout="center end">
+	<span flex="15"></span>
+	<md-card md-theme="{{ showDarkTheme ? 'dark-blue' : 'default' }}" md-theme-watch flex>
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">Tournament</span>
+            <span class="md-subhead">Match</span>
+          </md-card-title-text>
+          <md-card-title-media>
+            <div class="md-media-lg card-media"><img src="templates/tournament.png" alt="group face" height="160" width="160"> </div>
+          </md-card-title-media>
+        </md-card-title>
+        <md-card-actions layout="row" layout-align="end center">
+          <md-button>Match</md-button>
+        </md-card-actions>
+      </md-card>
+      <md-card md-theme="{{ showDarkTheme ? 'dark-blue' : 'default' }}" md-theme-watch flex>
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">League</span>
+            <span class="md-subhead">Match</span>
+          </md-card-title-text>
+          <md-card-title-media>
+            <div class="md-media-lg card-media"><img src="templates/league.png" alt="group face" height="160" width="160"> </div>
+          </md-card-title-media>
+        </md-card-title>
+        <md-card-actions layout="row" layout-align="end center">
+          <md-button>Match</md-button>
+        </md-card-actions>
+      </md-card>
+      <md-card md-theme="{{ showDarkTheme ? 'dark-blue' : 'default' }}" md-theme-watch flex>
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">Groups</span>
+            <span class="md-subhead">Match</span>
+          </md-card-title-text>
+          <md-card-title-media>
+            <div class="md-media-lg card-media"><img src="templates/group.jpg" alt="group face" height="160" width="160"> </div>
+          </md-card-title-media>
+        </md-card-title>
+        <md-card-actions layout="row" layout-align="end center">
+          <md-button>Match</md-button>
+        </md-card-actions>
+      </md-card>
+      <span flex="15"></span>
+      </div>
+</md-content>
