@@ -1,0 +1,26 @@
+<form name="loginForm" layout="column" novalidate>
+    <div class="md-display-2"  layout="column"  layout-align="center center">Login</div>
+    <div layout="row" layout-align="center center">
+<!--    login code -->
+<md-whiteframe class="md-whiteframe-4dp" flex-gt-sm="45" layout="column" layout-padding layout-align="center center">
+    
+    <md-input-container  >
+    <label>USERNAME</label>
+    <input type="text" name="username" required data-ng-model="formData.username" minlength="8">
+    <div ng-messages="loginForm.username.$error">
+         <div ng-message="required" >this is required.</div>
+    </div>
+    </md-input-container>
+    <md-input-container  >
+    <label>PASSWORD</label>
+    <input type="password" name="password" required data-ng-model="formData.password" minlength="8">
+    <div ng-messages="loginForm.password.$error">
+         <div ng-message="required" >this is required.</div>
+    </div>
+    </md-input-container>
+    <div layout="column" layout-align="center center">
+    <md-button class="md-raised md-primary">sign in</md-button>
+    </div>
+ </md-whiteframe>
+    </div>
+</form>
