@@ -1,6 +1,6 @@
 (function(){
 
-	var macsite = angular.module('FifaApp', ['ngMaterial','ngMessages']);
+	var macsite = angular.module('FifaApp', ['ngMaterial','ngMessages','tournment']);
 
     macsite.config(function($interpolateProvider) {
         $interpolateProvider.startSymbol('{$');
