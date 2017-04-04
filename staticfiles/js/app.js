@@ -14,6 +14,9 @@
                 .when('/register',{
                     templateUrl:"templates/register.html"
                 })
+                .when('/selectMatch',{
+                    templateUrl:"templates/tournament.html"
+                })
     });
     macsite.controller('macsiteController',function($scope){
         $scope.value="";

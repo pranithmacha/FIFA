@@ -1,15 +1,30 @@
 <html lang="en" >
 <head>
+<style>
+.md-tall {
+    background-image: url("../templates/fifa.jpg");
+    background-repeat: no-repeat;
+    background-size: 1600px 600px;
+}
+</style>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Angular Material style sheet -->
   <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body ng-app="FifaApp" ng-cloak>
-   <md-toolbar class=" md-primary">
-      <h2 class="md-toolbar-tools"><span >FIFA Tournament League</span></h2>
+   <md-toolbar class=" md-primary md-tall" style="min-height: 231px;">
+   	  <div layout="column">
+   	  <span flex-gt-sm="90"></span>
+   	  <div layout="row" layout-align="end end">
+      <h2 class="md-toolbar-tools md-truncate"><span style="color:black;">FIFA Tournament League</span></h2>
+      <md-button layout-align="center end" ng-href="/#login"><i class="material-icons">person</i><span hide-sm hide-xs >Login</span></md-button>
+      <md-button layout-align="center end" ng-href="/#register"><i class="material-icons">person_add</i><span hide-sm hide-xs>Register</span></md-button>
+      </div>
+      </div>
     </md-toolbar>
     <div ng-view></div>
-    <md-toolbar class=" md-primary" style="background-color: black;color:white;position: fixed;left: 0; bottom: 0;width: 100%; overflow:hidden;">
+    <md-toolbar class=" md-primary" style="background-color: black;color:white;position: relative;left: 0; clear: both;bottom: 0;width: 100%; ">
       <h2 class="md-toolbar-tools" layout-align="end end">Copyrights by --&copy;Pranith Macha</h2>
     </md-toolbar>
   <!-- Angular Material requires Angular.js Libraries -->
