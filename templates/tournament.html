@@ -1,57 +1,61 @@
-<md-content ng-controller="tournamentContrl" >
-	<div ng-if="!hideTournament">
-	<p class="md-title" layout="column" layout-align="center center"> Please select the match you want to play</p>
-	<br><br>
-	<div layout="row" layout="center end">
-	<span flex="15"></span>
-	<md-card md-theme="{{ showDarkTheme ? 'dark-blue' : 'default' }}" md-theme-watch flex>
-        <md-card-title>
-          <md-card-title-text>
-            <span class="md-headline">Tournament</span>
-            <span class="md-subhead">Match</span>
-          </md-card-title-text>
-          <md-card-title-media>
-            <div class="md-media-lt-md card-media"><img src="templates/tournament.png" alt="group face" height="100" width="100"> </div>
-          </md-card-title-media>
-        </md-card-title>
-        <md-card-actions layout="row" layout-align="end center">
-          <md-button ng-click="tournament()">Match</md-button>
-        </md-card-actions>
-      </md-card>
-      <md-card md-theme="{{ showDarkTheme ? 'dark-blue' : 'default' }}" md-theme-watch flex>
-        <md-card-title>
-          <md-card-title-text>
-            <span class="md-headline">League</span>
-            <span class="md-subhead">Match</span>
-          </md-card-title-text>
-          <md-card-title-media>
-            <div class="md-media-md card-media"><img src="templates/league.png" alt="group face" height="100" width="100"> </div>
-          </md-card-title-media>
-        </md-card-title>
-        <md-card-actions layout="row" layout-align="end center">
-          <md-button ng-click="league()">Match</md-button>
-        </md-card-actions>
-      </md-card>
-      <md-card md-theme="{{ showDarkTheme ? 'dark-blue' : 'default' }}" md-theme-watch flex>
-        <md-card-title>
-          <md-card-title-text>
-            <span class="md-headline">Groups</span>
-            <span class="md-subhead">Match</span>
-          </md-card-title-text>
-          <md-card-title-media>
-            <div class="md-media-md card-media"><img src="templates/group.jpg" alt="group face" height="100" width="100"> </div>
-          </md-card-title-media>
-        </md-card-title>
-        <md-card-actions layout="row" layout-align="end center">
-          <md-button ng-click="group()">Match</md-button>
-        </md-card-actions>
-      </md-card>
-      <span flex="15"></span>
-      </div>
-      </div>
-      <div ng-if="hideTournament">
-      	<div ng-if="tournament">hello t</div>
-      	<div ng-if="group">hello g</div>
-      	<div ng-if="league">hello l</div>
-      </div>
+<md-content layout="column" style="height:500px;" ng-cloak ng-controller="tournamentContrl">
+	<section layout="row" flex>
+    <form name="MatchForm" no-validate>
+		<p class="md-display-2" layout="column" layout-align="center center">League</p>
+		<div layout="row" layout-margin>
+		<md-input-container flex>
+	       <md-select ng-model="Match" placeholder="Select" layout="column" layout-align="center center">
+	    	<md-option  ng-value="League">League</md-option>
+			<md-option ng-value="Group">Group</md-option>
+			<md-option  ng-value="Tournament">Tournament</md-option>
+			</md-select>
+		</md-input-container>
+		<md-input-container flex>
+	         <label>League Name</label>
+	         <input required name="leagueName" ng-model="Match.leagueName">
+	         <div ng-messages="MatchForm.leagueName.$error">
+	           <div ng-message="required">This is required.</div>
+	         </div>
+	       </md-input-container>
+		<md-input-container flex>
+         	<label>Number of Players</label>
+        		<input required name="NumPlayers" ng-model="Match.NumPlayers">
+	         <div ng-messages="MatchForm.NumPlayers.$error">
+	           <div ng-message="required">This is required.</div>
+	         </div>
+	       </md-input-container>
+	    </div>
+	    <div layout="row" layout-align="center center">
+	    	<md-button ng-click="playMatch()" class="md-raised md-primary">Play</md-button>
+	    </div>
+   	</form>
+   	<md-whiteframe class="md-whiteframe-4dp" ng-if="hideTournament" layout="column" flex layout-margin>
+   		<div layout="column" >
+   		<md-list>
+   			<md-list-item layout="row" layout-wrap>
+   				<p flex class="md-title">Name</p>
+   				<p flex class="md-title"> Played</p>
+   				<p flex class="md-title"> Won</p>
+   				<p flex class="md-title"> Draw</p>
+   				<p flex class="md-title"> Lost</p>
+   				<p flex class="md-title"> Points</p>
+   				<p flex class="md-title"> Goals</p>
+   				<p flex class="md-title">Home Goals</p>
+   				<p flex class="md-title">Away goals</p>
+   			</md-list-item>
+			<md-list-item layout="row" layout-wrap ng-repeat="Match in Matchlist" >
+				<p flex ng-bind="Match.name"></p>
+				<p flex ng-bind="Match.played"></p>
+				<p flex ng-bind="Match.won"></p>
+				<p flex ng-bind="Match.draw"></p>
+				<p flex ng-bind="Match.lost"></p>
+				<p flex ng-bind="Match.points"></p>
+				<p flex ng-bind="Match.goals"></p>
+				<p flex ng-bind="Match.home_goals"></p>
+				<p flex ng-bind="Match.away_goals"></p>
+			</md-list-item>
+		</md-list>
+   		</div>
+   	</md-whiteframe>
+    </section>
 </md-content>

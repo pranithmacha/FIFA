@@ -1,6 +1,6 @@
 (function(){
 
-	var macsite = angular.module('FifaApp', ['ngMaterial','ngMessages','ngRoute']);
+	var macsite = angular.module('FifaApp', ['ngMaterial','ngMessages','ngRoute','tournment']);
 
     macsite.config(function($interpolateProvider,$routeProvider, $locationProvider) {
         $interpolateProvider.startSymbol('{$');
@@ -15,7 +15,8 @@
                     templateUrl:"templates/register.html"
                 })
                 .when('/selectMatch',{
-                    templateUrl:"templates/tournament.html"
+                    templateUrl:"templates/tournament.html",
+                    controller:"tournamentContrl"
                 })
     });
     macsite.controller('macsiteController',function($scope){

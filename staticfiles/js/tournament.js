@@ -1,25 +1,40 @@
 var app = angular.module('tournment', []);
 app.controller('tournamentContrl',function($scope){
 	$scope.hideTournament = false;
-	$scope.tournament = false;
-	$scope.group = false;
-	$scope.league = false;
-	$scope.tournament= function(){
+	$scope.Matchlist=null;
+	$scope.playMatch=function(){
 		$scope.hideTournament = true;
-		$scope.tournament = true;
-		$scope.group = false;
-		$scope.league = false;
-	}
-	$scope.league= function(){
-		$scope.hideTournament = true;
-		$scope.league = true;
-		$scope.tournament = false;
-		$scope.group = false;
-	}
-	$scope.group= function(){
-		$scope.hideTournament = true;
-		$scope.group = true;
-		$scope.league = false;
-		$scope.tournament = false;
+		debugger;
+		$scope.Matchlist=[{
+			name: 'Pranith',
+			played: 12,
+			won: 9,
+			draw: 1,
+			lost:2,
+			points: 28,
+			goals: 28,
+			home_goals: 18,
+			away_goals: 10,
+		}, {
+			name: 'Navya',
+			played: 12,
+			won: 9,
+			draw: 1,
+			lost:2,
+			points: 28,
+			goals: 28,
+			home_goals: 18,
+			away_goals: 10,
+		},{
+			name: 'sanjana',
+			played: 12,
+			won: 9,
+			draw: 1,
+			lost:2,
+			points: 28,
+			goals: 28,
+			home_goals: 18,
+			away_goals: 10,
+		}]
 	}
 })
