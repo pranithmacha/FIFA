@@ -1,4 +1,5 @@
 import os
+from django.urls import reverse_lazy
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -21,6 +22,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'league',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -32,6 +34,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'log_request_id.middleware.RequestIDMiddleware',
 )
 
 ROOT_URLCONF = 'fifa.urls'
@@ -60,15 +63,16 @@ WSGI_APPLICATION = 'fifa.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'fifa',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'PORT': '5432',
+        'HOST': 'localhost',
     }
 }
 
-
 # Internationalization
-# https://docs.djangoproject.com/en/1.8/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
@@ -83,6 +87,73 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'staticfiles'),)
 STATIC_ROOT = os.path.join(BASE_DIR, 'prod_staticfiles')
+
+# logging configuration
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '[%(request_id)s %(levelname)-8s %(asctime)s %(lineno)s %(name)s] %(message)s'
+        },
+        'simple': {
+            'format': '[%(request_id)s %(levelname)-8s] %(message)s'
+        },
+    },
+    'filters': {
+        'request_id': {
+            '()': 'log_request_id.filters.RequestIDFilter'
+        },
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse'
+        },
+    },
+    'handlers': {
+        'mail_admins': {
+            'level': 'ERROR',
+            'class': 'django.utils.log.AdminEmailHandler',
+            'filters': ['require_debug_false'],
+        },
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'filters': ['request_id'],
+            'formatter': 'verbose'
+        },
+        'fifa_logfile': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filters': ['request_id'],
+            'formatter': 'verbose',
+            'filename': 'fifa.log',
+        },
+    },
+    'loggers': {
+        'django.request': {
+            'handlers': ['mail_admins'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+        '': {
+            'handlers': ['console', 'fifa_logfile'],
+            'level': 'INFO',
+        },
+    }
+}
+
+
+# AUTHENTICATION_BACKENDS = (
+#     'mongoengine.django.auth.MongoEngineBackend',
+# )
+# LOGIN_REDIRECT_URL = reverse_lazy('login_success')
+# LOGIN_URL = reverse_lazy('login')
+
+# AUTH
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend'
+]
+LOGIN_REDIRECT_URL = reverse_lazy('login_success')
+LOGIN_URL = reverse_lazy('login')
 
 try:
     from fifa.local_settings import *
