@@ -7,3 +7,4 @@ class RegistrationForm(forms.Form):
     password = forms.PasswordInput()
     confirm_password = forms.PasswordInput()
 
+

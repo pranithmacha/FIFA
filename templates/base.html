@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" >
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Angular Material style sheet -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body ng-app="FifaApp">
+   <md-toolbar class="md-primary" style="background-color: black;">
+   	  <div layout="row">
+      <h2 class="md-toolbar-tools md-truncate"><span >FIFA Tournament League</span></h2>
+      <md-button layout-align="center end" ng-href="/#login"><i class="material-icons">person</i><span hide-sm hide-xs>Login</span></md-button>
+      <md-button layout-align="center end" ng-href="/#register"><i class="material-icons">person_add</i><span hide-sm hide-xs>Register</span></md-button>
+      </div>
+    </md-toolbar>
+    <div>
+
+    {% block content %}
+
+    {% endblock %}
+
+
+    </div>
+    <md-toolbar class=" md-primary" style="background-color: black;color:white;position: fixed;left: 0; bottom: 0;width: 100%; overflow:hidden;">
+      <h2 class="md-toolbar-tools" layout-align="end end">Copyrights by --&copy;Pranith Macha</h2>
+    </md-toolbar>
+  <!-- Angular Material requires Angular.js Libraries -->
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script><script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
+  <!-- Angular Material Library -->
+  <script src="{% get_static_prefix %}vendor/bootstrap/js/bootstrap.min.js"></script>
+   <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+
+  <!-- Your application bootstrap  -->
+  
+  <script type="text/javascript" src="{% get_static_prefix %}/js/tournament.js"></script>
+
+</body>
+</html>

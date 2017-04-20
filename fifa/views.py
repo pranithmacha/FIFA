@@ -39,6 +39,8 @@ def login(request):
     assert isinstance(user, mongoengine.django.auth.User)
 
 
+def register(request):
+    return None
 
 
 

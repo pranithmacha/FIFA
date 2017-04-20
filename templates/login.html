@@ -1,28 +1,64 @@
-<form name="loginForm" layout="column" novalidate>
-<span flex-gt-sm="10"></span>
-	<div layout="row" layout-align="center center">	
-	<md-whiteframe class="md-whiteframe-4dp" flex-gt-sm="45" layout="column" layout-padding >
-		<md-toolbar layout="row" class="md-hue-3">
-			<div class="md-display-2 md-toolbar-tools"  layout="row"  layout-align="center center"><i class="material-icons">group</i>Login</div>
-		</md-toolbar>
-		<br>
-	    <md-input-container>
-	    <label>USERNAME</label>
-	    <input type="text" name="username" required data-ng-model="formData.username" minlength="8">
-	    <div ng-messages="loginForm.username.$error">
-	         <div ng-message="required" >this is required.</div>
-	    </div>
-	    </md-input-container>
-	    <md-input-container  >
-	    <label>PASSWORD</label>
-	    <input type="password" name="password" required data-ng-model="formData.password" minlength="8">
-	    <div ng-messages="loginForm.password.$error">
-	         <div ng-message="required" >this is required.</div>
-	    </div>
-	    </md-input-container>
-	    <div layout="column" layout-align="center center">
-	    <md-button class="md-raised md-primary">sign in</md-button>
-	    </div>
-	 </md-whiteframe>
-	 </div>
-</form>
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if form.errors %}
+<p>Your username and password didn't match. Please try again.</p>
+{% endif %}
+
+<!-- Contact Section -->
+
+<section id="contact">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2>Login</h2>
+                <hr class="star-primary">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
+                <!-- The form should work on most web servers, but if the form is not working you may need to configure your web server differently. -->
+                <form name="sentMessage" id="contactForm" novalidate method="post" action="{% url 'login' %}">
+                    {% csrf_token %}
+                    <div class="row control-group">
+                        <div class="form-group col-xs-12 floating-label-form-group controls">
+                            <label>{{form.username.label_tag}}</label>
+                            <input type="text" class="form-control" placeholder="Username" name="username"
+                                   id="id_username"
+                                   required data-validation-required-message="Please enter your username.">
+                            <p class="help-block text-danger"></p>
+                        </div>
+                    </div>
+                    <div class="row control-group">
+                        <div class="form-group col-xs-12 floating-label-form-group controls">
+                            <label>{{form.password.label_tag}}</label>
+                            <input type="password" class="form-control" placeholder="Password" name="password"
+                                   id="id_password"
+                                   required data-validation-required-message="Please enter your password.">
+
+                            <p class="help-block text-danger"></p>
+                        </div>
+                    </div>
+
+                    <br>
+                    <div id="success"></div>
+                    <div class="row">
+                        <div class="form-group col-xs-12">
+                            <button type="submit" class="btn btn-success btn-lg">Login</button>
+                        </div>
+                        <input type="hidden" name="next" value=""/>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="row">
+    <div class="form-group col-xs-12">
+        <a href="{%url 'register'%}" class="btn btn-success btn-lg">Register</a>
+    </div>
+</div>
+{% endblock %}
