@@ -1,4 +1,4 @@
-from django.conf.urls import url
+from django.conf.urls import url, include
 from django.contrib.auth import views as auth_views
 from league import views
 
@@ -8,5 +8,5 @@ urlpatterns = [
         {'template_name': 'login.html'}, name='login'),
     url(r'^logout/$', auth_views.logout, {'template_name': 'logout.html'}, name='logout'),
     url(r'^login_successful$', views.login_success, name='login_success'),
-    url(r'^register', views.register, name='register'),
+    url(r'', include('league.urls')),
 ]
