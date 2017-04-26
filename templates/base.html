@@ -8,13 +8,9 @@
   <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
-<body ng-app="FifaApp">
-   <md-toolbar class="md-primary" style="background-color: black;">
-   	  <div layout="row">
-      <h2 class="md-toolbar-tools md-truncate"><span >FIFA Tournament League</span></h2>
-      <md-button layout-align="center end" ng-href="/#login"><i class="material-icons">person</i><span hide-sm hide-xs>Login</span></md-button>
-      <md-button layout-align="center end" ng-href="/#register"><i class="material-icons">person_add</i><span hide-sm hide-xs>Register</span></md-button>
-      </div>
+<body ng-app="FifaApp" >
+   <md-toolbar class="md-primary" style="background-color: black;" >
+      <span class="md-toolbar-tools md-truncate"><span >FIFA Tournament League</span></span>
     </md-toolbar>
     <div>
 
@@ -36,8 +32,9 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
    <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
-
-  <!--<script type="text/javascript" src="{% get_static_prefix %}/js/tournament.js"></script>-->
+    <script src="{% get_static_prefix %}js/app.js"></script>
+    <script src="{% get_static_prefix %}js/tournament.js"></script>
+  
 
 
 </body>

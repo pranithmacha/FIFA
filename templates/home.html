@@ -5,9 +5,38 @@
 {% if form.errors %}
 <p>Your username and password didn't match. Please try again.</p>
 {% endif %}
-
-<h1> homeeeeee !!!</h1>
-
+<div ng-controller="tournamentContrl">
+<h1>Click on the button to view the tournament details</h1>
+<a ng-click="playMatch()">Match</a>
+<md-whiteframe class="md-whiteframe-4dp" ng-if="hideTournament" layout="column" flex layout-margin>
+   		<div layout="column" >
+   		<md-list>
+   			<md-list-item layout="row" layout-wrap>
+   				<p flex class="md-title">Name</p>
+   				<p flex class="md-title"> Played</p>
+   				<p flex class="md-title"> Won</p>
+   				<p flex class="md-title"> Draw</p>
+   				<p flex class="md-title"> Lost</p>
+   				<p flex class="md-title"> Points</p>
+   				<p flex class="md-title"> Goals</p>
+   				<p flex class="md-title">Home Goals</p>
+   				<p flex class="md-title">Away goals</p>
+   			</md-list-item>
+			<md-list-item layout="row" layout-wrap ng-repeat="Match in Matchlist" >
+				<p flex ng-bind="Match.name"></p>
+				<p flex ng-bind="Match.played"></p>
+				<p flex ng-bind="Match.won"></p>
+				<p flex ng-bind="Match.draw"></p>
+				<p flex ng-bind="Match.lost"></p>
+				<p flex ng-bind="Match.points"></p>
+				<p flex ng-bind="Match.goals"></p>
+				<p flex ng-bind="Match.home_goals"></p>
+				<p flex ng-bind="Match.away_goals"></p>
+			</md-list-item>
+		</md-list>
+   		</div>
+   	</md-whiteframe>
+</div>
 <a href="{% url 'logout' %}">logout</a>
 
 {% endblock %}
