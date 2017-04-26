@@ -1,7 +1,11 @@
 var app = angular.module('tournment', []);
 app.controller('tournamentContrl',function($scope){
 	$scope.hideTournament = false;
+	$scope.createTournament = false;
 	$scope.Matchlist=null;
+	$scope.createMatch=function(){
+        $scope.createTournament = true;
+	}
 	$scope.playMatch=function(){
 		$scope.hideTournament = true;
 		debugger;
