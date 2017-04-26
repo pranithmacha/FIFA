@@ -34,6 +34,23 @@
 	         </div>
 	       </md-input-container>
 	    </div>
+        <div layout="row" layout-margin  ng-if="Match.NumPlayers" ng-repeat="i in range.slice(0,Match.NumPlayers) track by $index" >
+            <span>Please fill out the player <span ng-bind="$index+1"></span> details</span>
+            <md-input-container flex>
+	         <label>Player Name</label>
+	         <input required name="leagueName" ng-model="Match.leagueName">
+	         <div ng-messages="MatchForm.leagueName.$error">
+	           <div ng-message="required">This is required.</div>
+	         </div>
+	       </md-input-container>
+            <md-input-container flex>
+	         <label>Country Name</label>
+	         <input required name="leagueName" ng-model="Match.leagueName">
+	         <div ng-messages="MatchForm.leagueName.$error">
+	           <div ng-message="required">This is required.</div>
+	         </div>
+	       </md-input-container>
+        </div>
 	    <div layout="row" layout-align="center center">
 	    	<md-button ng-click="playMatch()" class="md-raised md-primary">Play</md-button>
 	    </div>

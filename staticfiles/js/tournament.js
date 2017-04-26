@@ -3,6 +3,11 @@ app.controller('tournamentContrl',function($scope){
 	$scope.hideTournament = false;
 	$scope.createTournament = false;
 	$scope.Matchlist=null;
+    var num_players = 10;
+	//ng repeat value to be obtained
+	$scope.range = new Array(num_players);
+
+
 	$scope.createMatch=function(){
         $scope.createTournament = true;
 	}
