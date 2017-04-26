@@ -22,8 +22,7 @@ class TournamentSummary(models.Model):
     won = models.IntegerField(default=0)
     lost = models.IntegerField(default=0)
     drawn = models.IntegerField(default=0)
-    home_goals = models.IntegerField(default=0)
-    away_goals = models.IntegerField(default=0)
+    goals = models.IntegerField(default=0)
     total_goals = models.IntegerField(default=0)
     points = models.IntegerField(default=0)
     active = models.IntegerField(default=1)
@@ -46,5 +45,15 @@ class GameSummary(models.Model):
     player_one_team = models.ForeignKey(Team, related_name="player_one_team")
     player_two_team = models.ForeignKey(Team, related_name="player_two_team")
     result = models.CharField(max_length=200, blank=False, null=False)
+
+
+class TournamentGameRecord(models.Model):
+    tournament = models.ForeignKey(Tournament)
+    player_one = models.ForeignKey(User, related_name="player_one_record")
+    player_two = models.ForeignKey(User, related_name="player_two_record", default=None)
+    games = models.IntegerField(default=0)
+
+    class Meta:
+        unique_together = (("tournament", "player_one", "player_two"),)
 
 
