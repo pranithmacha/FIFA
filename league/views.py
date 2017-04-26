@@ -88,7 +88,8 @@ def save_game_summary(request):
         log.exception(e)
 
 
-
+def create(request):
+    User.objects.create_user(username="xyz", password="xyz")
 
 
 
