@@ -22,7 +22,7 @@ def save_tournament():
 
 
 def login_success(request):
-    return redirect(to=reverse('home'))
+    return render(request, "tournament.html", {})
 
 
 def create_user():
