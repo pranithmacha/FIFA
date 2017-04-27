@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from league.models import Tournament, TournamentSummary, Team
 from django.db.utils import IntegrityError
 from league.forms import RegistrationForm
+from league import tournaments_manager
 import logging
 
 log = logging.getLogger(__name__)
@@ -17,12 +18,14 @@ def home(request):
 
 @login_required
 def save_tournament(request):
+    # myform = MyForm(request.POST, request=request)
     tournament_name = "xyz"
     players = ""
     tournament_type = ""
+    tournament_name = ""
     try:
-        tournaments = Tournament.objects.get(tournament_name=tournament_name)
-        if tournaments:
+        tournament = tournaments_manager.get_tournament_by_name(tournament_name)
+        if tournament:
             log.error("tournament with name {0} already exists".format(tournament_name))
         else:
             log.info("creating tournament with name {0}".format(tournament_name))
