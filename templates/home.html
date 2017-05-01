@@ -11,7 +11,7 @@
 
 {% for tournament in tournaments %}
 
-{{tournament.tournament_name}}
+<a href="{% url 'get_tournament_summary' tournament.id %}">{{tournament.tournament_name}}</a>
 
 {% endfor %}
 

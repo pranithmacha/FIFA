@@ -2,7 +2,8 @@
 
 {% block content %}
 
-<form name="regForm" layout="column" action="{% url 'register'%}"novalidate>
+<form name="regForm" layout="column" action="{% url 'register'%}" method="POST" novalidate>
+	  {% csrf_token %}
 	<div layout="row" layout-align="center center">	
 	<md-whiteframe class="md-whiteframe-4dp" flex-gt-sm="45" layout="column" layout-padding layout-margin>
 		<md-toolbar layout="row" class="md-hue-3 md-accent">
@@ -38,7 +39,7 @@
 	    </div>
 	    </md-input-container>
 	    <div layout="column" layout-align="center center">
-	    <md-button class="md-raised md-primary">Register</md-button>
+	    <input class="md-raised md-primary" type="submit" value="Submit">
 	    </div>
 	 </md-whiteframe>
 	 </div>

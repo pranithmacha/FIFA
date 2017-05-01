@@ -6,6 +6,10 @@
 <p>Your username and password didn't match. Please try again.</p>
 {% endif %}
 
+{% if registration_success %}
+       <p>User {{registration_success}} was  successfuly created</p>
+{% endif %}
+
 <!-- Contact Section -->
 
 <section id="contact">

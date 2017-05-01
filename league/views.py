@@ -2,8 +2,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from league.models import Tournament, TournamentSummary, Team
-from django.db.utils import IntegrityError
+from league.models import Tournament, Team
 from league.forms import RegistrationForm, TournamentForm
 from league import tournaments_manager, user_manager
 import logging
@@ -40,8 +39,7 @@ def create_tournament(request):
                     players.append(user)
                 tournament = tournaments_manager.create_tournament(tournament_name, tournament_type,
                                                                    number_of_games, players)
-                tournament_summary = tournaments_manager.get_tournament_summary(tournament)
-                render(request, "")
+                return redirect("get_tournament_summary", tournament_id=tournament.id)
         except AttributeError as e:
             log.error("could not create tournament with name {0}".format(tournament_name))
             log.exception(e)
@@ -57,26 +55,28 @@ def login_success(request):
 def register(request):
     if request.method == "GET":
         return render(request, "register.html", {})
+    user_name = None
     if request.method == "POST":
         registration_form = RegistrationForm(request.POST)
         if registration_form.is_valid():
             log.info("valid registration form")
-            user_info_dict = dict()
             try:
-                user_info_dict["user_name"] = request.POST.get("user_name")
-                user_info_dict["email"] = request.POST.get("email")
-                user_info_dict["password"] = request.POST.get("password")
-                user_info_dict["confirm_password"] = request.POST.get("confirm_password")
-                profile = User.objects.create_user()
+                user_name = request.POST.get("user_name")
+                email = request.POST.get("email")
+                password = request.POST.get("password")
+                confirm_password = request.POST.get("confirm_password")
+                if password != confirm_password:
+                    raise AttributeError("passwords do not match")
+                profile = user_manager.create_user(user_name=user_name, password=password, email=email)
                 log.info("user {0} successfully created".format(profile.username))
-            except IntegrityError as ie:
-                log.exception(ie)
-                message = "username {0} already exists".format(user_info_dict["username"])
+            except AttributeError as ae:
+                log.exception(ae)
+                error = ae.message
+                return render(request, "register.html", {"error": error})
         else:
-            pass
-    else:
-        log.error("invalid registration form")
-    return render(request, "register.html", {})
+            error = "please fill all the required fields"
+            return render(request, "register.html", {"error": error})
+    return render(request, "login.html", {"registration_success": user_name})
 
 
 @login_required
@@ -94,6 +94,10 @@ def save_game_summary(request):
         player_two_team = Team.objects.get(pk=team_two_id)
     except Exception as e:
         log.exception(e)
+
+
+def get_tournament_summary(request, tournament_id):
+    return render(request, "tournament_summary")
 
 
 def create_user(request):

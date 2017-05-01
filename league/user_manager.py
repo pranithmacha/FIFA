@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from league.models import Tournament
+from django.db.utils import IntegrityError
 import logging
 
 log = logging.getLogger(__name__)
@@ -59,8 +60,13 @@ def update_user():
     pass
 
 
-def create_user():
-    pass
+def create_user(user_name, email, password):
+    try:
+        user = User.objects.create_user(username=user_name, password=password, email=email)
+    except IntegrityError as ie:
+        log.error(ie)
+        raise AttributeError("user {0} already exists".format(user_name))
+    return user
 
 
 
