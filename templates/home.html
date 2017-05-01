@@ -7,8 +7,8 @@
 {% endif %}
 <div ng-controller="tournamentContrl">
 	<br><br>
-
-
+<md-button ng-click="playMatch()">summary</md-button>
+<md-button ng-click="showPrompt($event)">Results</md-button>
 <md-whiteframe class="md-whiteframe-4dp" ng-if="hideTournament" layout="column" flex layout-margin>
    		<div layout="column" >
    		<md-list>
