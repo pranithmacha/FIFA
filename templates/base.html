@@ -10,12 +10,15 @@
 </head>
 <body ng-app="FifaApp" >
    <md-toolbar class="md-primary" style="background-color: black;" >
+     <div layout="row">
       <span class="md-toolbar-tools md-truncate"><span >FIFA Tournament League</span></span>
         {% if user.is_authenticated %}
 
-          {{user.username}}
-
+          <md-button flex="10" ng-href="" > <md-tooltip md-direction="bottom">Logged in as</md-tooltip> <md-icon class="material-icons">person</md-icon>{{user.username}}</md-button>
+           <md-button flex="20" ng-href="{% url 'home' %}"> <md-tooltip md-direction="bottom">Create Tournamnet</md-tooltip> <md-icon class="material-icons">playlist_add</md-icon>Add League </md-button>
+           <md-button flex="10" ng-href="{% url 'logout' %}"> <md-tooltip md-direction="bottom">Logout</md-tooltip> <md-icon class="material-icons">person_pin</md-icon>Logout</md-button>
         {% endif %}
+        </div>
     </md-toolbar>
     <div>
 

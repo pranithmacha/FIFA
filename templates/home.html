@@ -6,9 +6,8 @@
 <p>Your username and password didn't match. Please try again.</p>
 {% endif %}
 <div ng-controller="tournamentContrl">
-<button class="btn btn-primary" ng-click="playMatch()">Match Details</button>
-<button class="btn btn-primary" ng-click="createMatch()">Create League</button>
-<md-whiteframe class="md-whiteframe-4dp" ng-if="createTournament" layout="column" flex layout-margin>
+	<br><br>
+<md-whiteframe class="md-whiteframe-4dp"  layout="column" flex layout-margin>
     <form name="MatchForm" no-validate>
 		<p class="md-display-2" layout="column" layout-align="center center">League</p>
 		<div layout="row" layout-margin>
@@ -61,8 +60,6 @@
    				<p flex class="md-title"> Lost</p>
    				<p flex class="md-title"> Points</p>
    				<p flex class="md-title"> Goals</p>
-   				<p flex class="md-title">Home Goals</p>
-   				<p flex class="md-title">Away goals</p>
    			</md-list-item>
 			<md-list-item layout="row" layout-wrap ng-repeat="Match in Matchlist" >
 				<p flex ng-bind="Match.name"></p>
@@ -72,13 +69,10 @@
 				<p flex ng-bind="Match.lost"></p>
 				<p flex ng-bind="Match.points"></p>
 				<p flex ng-bind="Match.goals"></p>
-				<p flex ng-bind="Match.home_goals"></p>
-				<p flex ng-bind="Match.away_goals"></p>
 			</md-list-item>
 		</md-list>
    		</div>
    	</md-whiteframe>
 </div>
-<a href="{% url 'logout' %}">logout</a>
 
 {% endblock %}
