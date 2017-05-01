@@ -13,8 +13,16 @@ def create_tournament(tournament, players):
     return True
 
 
-def get_tournaments_by_user(user_id):
-    tournaments = Tournament.objects.filter(players__id=user_id)
+def get_tournaments_by_user(user_id, active=None):
+    status = list()
+    if active:
+        status.append(1)
+    elif not status and status is not None:
+        status.append(0)
+    else:
+        status.append(1)
+        status.append(0)
+    tournaments = Tournament.objects.filter(players__id=user_id, status__in=status)
     return tournaments
 
 

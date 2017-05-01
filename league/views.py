@@ -13,37 +13,42 @@ log = logging.getLogger(__name__)
 
 @login_required
 def home(request):
-    return render(request, "home.html", {})
+    user_id = request.user.id
+    tournaments = tournaments_manager.get_tournaments_by_user(user_id)
+    return render(request, "home.html", {"tournaments": tournaments})
 
 
 @login_required
-def save_tournament(request):
+def create_tournament(request):
+    if request.method == "GET":
+        return render(request, "tournament.html", {})
     tournament_form = TournamentForm(request.POST, request=request)
     if tournament_form.is_valid():
-        pass
-    tournament_name = "xyz"
-    players = ""
-    tournament_type = ""
-    tournament_name = ""
-    try:
-        tournament = tournaments_manager.get_tournament_by_name(tournament_name)
-        if tournament:
-            log.error("tournament with name {0} already exists".format(tournament_name))
-        else:
-            log.info("creating tournament with name {0}".format(tournament_name))
-            tournament = Tournament.objects.get(tournament_name=tournament_name,
-                                                tournament_type=tournament_type, players=players)
-            for username in players:
-                try:
-                    player = User.objects.get(username=username)
-                    TournamentSummary.objects.create(tournament=tournament, player=player)
-                except Exception as er:
-                    log.exception(er)
-                    log.error("could not find user with username {0}".format(username))
-            return render(request, "", {"tournament": tournament})
-    except Exception as e:
-        log.error("could not create tournament with name {0}".format(tournament_name))
-        log.exception(e)
+        tournament_name = tournament_form.cleaned_data["tournament_name"]
+        tournament_type = tournament_form.cleaned_data["tournament_type"]
+        number_of_games = tournament_form.cleaned_data["number_of_games"]
+        players = tournament_form.players
+        try:
+            tournament = tournaments_manager.get_tournament_by_name(tournament_name)
+            if tournament:
+                log.error("tournament with name {0} already exists".format(tournament_name))
+            else:
+                log.info("creating tournament with name {0}".format(tournament_name))
+                tournament = Tournament.objects.get(tournament_name=tournament_name,
+                                                    tournament_type=tournament_type, players=players)
+                for username in players:
+                    try:
+                        player = User.objects.get(username=username)
+                        TournamentSummary.objects.create(tournament=tournament, player=player)
+                    except Exception as er:
+                        log.exception(er)
+                        log.error("could not find user with username {0}".format(username))
+                return render(request, "", {"tournament": tournament})
+        except Exception as e:
+            log.error("could not create tournament with name {0}".format(tournament_name))
+            log.exception(e)
+    else:
+        raise AttributeError
 
 
 @login_required
@@ -97,6 +102,13 @@ def create_user(request):
     User.objects.create_user(username="xyz", password="xyz")
 
 
+"""
+{% for tournament in tournaments %}
+
+{{tournament.tournament_name}}
+
+{% endfor %}
+"""
 
 
 

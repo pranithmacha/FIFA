@@ -30,5 +30,8 @@ class TournamentForm(forms.Form):
         if not self.players:
             raise forms.ValidationError("could not find any users in the request")
 
+    def get_players(self):
+        return self.players
+
 
 
