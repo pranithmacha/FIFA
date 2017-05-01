@@ -11,6 +11,11 @@
 <body ng-app="FifaApp" >
    <md-toolbar class="md-primary" style="background-color: black;" >
       <span class="md-toolbar-tools md-truncate"><span >FIFA Tournament League</span></span>
+        {% if user.is_authenticated %}
+
+          {{user.username}}
+
+        {% endif %}
     </md-toolbar>
     <div>
 

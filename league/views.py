@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from league.models import Tournament, TournamentSummary, Team
 from django.db.utils import IntegrityError
-from league.forms import RegistrationForm
+from league.forms import RegistrationForm, TournamentForm
 from league import tournaments_manager
 import logging
 
@@ -18,7 +18,9 @@ def home(request):
 
 @login_required
 def save_tournament(request):
-    # myform = MyForm(request.POST, request=request)
+    tournament_form = TournamentForm(request.POST, request=request)
+    if tournament_form.is_valid():
+        pass
     tournament_name = "xyz"
     players = ""
     tournament_type = ""
