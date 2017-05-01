@@ -6,11 +6,16 @@ log = logging.getLogger(__name__)
 
 
 @transaction.atomic
-def create_tournament(tournament, players):
-    tournament.save()
-    for player in players:
-        TournamentSummary.objects.create(tournament=tournament, player=player)
-    return True
+def create_tournament(tournament_name, tournament_type, number_of_games, players):
+    try:
+        tournament = Tournament.objects.create(tournament_name=tournament_name,
+                                               tournament_type=tournament_type,
+                                               number_of_games=number_of_games,
+                                               players=players)
+        for player in players:
+            TournamentSummary.objects.create(tournament=tournament, player=player)
+    except Exception:
+        raise AttributeError
 
 
 def get_tournaments_by_user(user_id, active=None):

@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from league.models import Tournament, TournamentSummary, Team
 from django.db.utils import IntegrityError
 from league.forms import RegistrationForm, TournamentForm
-from league import tournaments_manager
+from league import tournaments_manager, user_manager
 import logging
 
 log = logging.getLogger(__name__)
@@ -27,24 +27,22 @@ def create_tournament(request):
         tournament_name = tournament_form.cleaned_data["tournament_name"]
         tournament_type = tournament_form.cleaned_data["tournament_type"]
         number_of_games = tournament_form.cleaned_data["number_of_games"]
-        players = tournament_form.players
+        player_names = tournament_form.players
+        players = list()
         try:
             tournament = tournaments_manager.get_tournament_by_name(tournament_name)
             if tournament:
                 log.error("tournament with name {0} already exists".format(tournament_name))
             else:
                 log.info("creating tournament with name {0}".format(tournament_name))
-                tournament = Tournament.objects.get(tournament_name=tournament_name,
-                                                    tournament_type=tournament_type, players=players)
-                for username in players:
-                    try:
-                        player = User.objects.get(username=username)
-                        TournamentSummary.objects.create(tournament=tournament, player=player)
-                    except Exception as er:
-                        log.exception(er)
-                        log.error("could not find user with username {0}".format(username))
-                return render(request, "", {"tournament": tournament})
-        except Exception as e:
+                for user_name in player_names:
+                    user = user_manager.get_user_by_username(user_name)
+                    players.append(user)
+                tournament = tournaments_manager.create_tournament(tournament_name, tournament_type,
+                                                                   number_of_games, players)
+                tournament_summary = tournaments_manager.get_tournament_summary(tournament)
+                render(request, "")
+        except AttributeError as e:
             log.error("could not create tournament with name {0}".format(tournament_name))
             log.exception(e)
     else:
