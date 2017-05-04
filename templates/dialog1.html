@@ -1,6 +1,86 @@
 
 <md-dialog>
-<form>
-hello
+<form name="resultForm" >
+    <md-toolbar class="md-primary" style="background-color: black;" >
+        <div class="md-toolbar-tools">
+            <h2>Result entry</h2>
+        </div>
+    </md-toolbar>
+    <md-dialog-content layout="column" layout-padding>
+        <p class="md-headline"> Enter the details of the match result </p>
+         <div layout="row" layout-margin>
+            <md-input-container flex="70">
+            <label>Tournament Name</label>
+            <input type="text" name="TournamentName" required data-ng-model="formData.TournamentName" minlength="8">
+            <div ng-messages="resultForm.TournamentName.$error">
+                 <div ng-message="required" >This is required.</div>
+            </div>
+            </md-input-container>
+            <md-input-container flex>
+            <label>Date Played</label>
+            <input type="text" name="DatePlayed" required data-ng-model="formData.DatePlayed" minlength="8">
+            <div ng-messages="resultForm.DatePlayed.$error">
+                 <div ng-message="required" >This is required.</div>
+            </div>
+            </md-input-container>
+        </div>
+        <div layout="row" class="md-title">
+            Player One Details:
+        </div>
+        <div layout="row" layout-margin>
+            <md-input-container flex>
+            <label>Player name</label>
+            <input type="text" name="PlayerName1" required data-ng-model="formData.PlayerName1" minlength="8">
+            <div ng-messages="resultForm.PlayerName1.$error">
+                 <div ng-message="required" >This is required.</div>
+            </div>
+            </md-input-container>
+            <md-input-container flex>
+            <label>Team Name</label>
+            <input type="text" name="TeamName1" required data-ng-model="formData.TeamName1" minlength="8">
+            <div ng-messages="resultForm.TeamName1.$error">
+                 <div ng-message="required" >This is required.</div>
+            </div>
+            </md-input-container>
+            <md-input-container flex>
+            <label>Goals</label>
+            <input type="text" name="Goals1" required data-ng-model="formData.Goals1" minlength="8">
+            <div ng-messages="resultForm.Goals1.$error">
+                 <div ng-message="required" >This is required.</div>
+            </div>
+            </md-input-container>
+        </div>
+        <div layout="row" class="md-title">
+            Player Two Details:
+        </div>
+        <div layout="row" layout-margin>
+            <md-input-container flex>
+            <label>Player Name</label>
+            <input type="text" name="PlayerName2" required data-ng-model="formData.PlayerName2" minlength="8">
+            <div ng-messages="resultForm.PlayerName2.$error">
+                 <div ng-message="required" >This is required.</div>
+            </div>
+            </md-input-container>
+            <md-input-container flex>
+            <label>Team Name</label>
+            <input type="text" name="TeamName2" required data-ng-model="formData.TeamName2" minlength="8">
+            <div ng-messages="resultForm.TeamName2.$error">
+                 <div ng-message="required" >This is required.</div>
+            </div>
+            </md-input-container>
+            <md-input-container flex>
+            <label>Goals</label>
+            <input type="text" name="Goals2" required data-ng-model="formData.Goals2" minlength="8">
+            <div ng-messages="resultForm.Goals2.$error">
+                 <div ng-message="required" >This is required.</div>
+            </div>
+            </md-input-container>
+        </div>
+    <div layout="row" layout-align="center center">
+        <md-button class="md-warn md-raised" ng-click="onOk(formData)">submit</md-button>
+        <md-button class=" md-raised" ng-click="cancel()">cancel</md-button>
+    </div>
+
+    </md-dialog-content>
 </form>
 </md-dialog>
