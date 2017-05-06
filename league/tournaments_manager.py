@@ -32,7 +32,11 @@ def get_tournaments_by_user(user_id, active=None):
 
 
 def get_tournament_by_name(tournament_name):
-    tournament = Tournament.objects.get(tournament_name=tournament_name)
+    tournament = None
+    try:
+        tournament = Tournament.objects.get(tournament_name=tournament_name)
+    except Tournament.DoesNotExist as e:
+        log.exception(e)
     return tournament
 
 

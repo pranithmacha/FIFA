@@ -28,6 +28,7 @@ def create_tournament(request):
         number_of_games = tournament_form.cleaned_data["number_of_games"]
         player_names = tournament_form.players
         players = list()
+        tournament_type = "league"
         try:
             tournament = tournaments_manager.get_tournament_by_name(tournament_name)
             if tournament:
@@ -44,7 +45,7 @@ def create_tournament(request):
             log.error("could not create tournament with name {0}".format(tournament_name))
             log.exception(e)
     else:
-        raise AttributeError
+        raise AttributeError("invalid form")
 
 
 @login_required
@@ -101,7 +102,7 @@ def get_tournament_summary(request, tournament_id):
 
 
 def create_user(request):
-    User.objects.create_user(username="xyz", password="xyz")
+    User.objects.create_user(username="abc", password="abc")
 
 
 """

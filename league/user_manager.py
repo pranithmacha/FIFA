@@ -5,6 +5,7 @@ import logging
 
 log = logging.getLogger(__name__)
 
+
 # IntegrityError
 def get_all_users():
     """
@@ -27,7 +28,11 @@ def get_user_by_username(username):
     """
     :type username: username of the user to search
     """
-    user = User.objects.get(username=username)
+    user = None
+    try:
+        user = User.objects.get(username=username)
+    except User.DoesNotExist as ude:
+        log.exception(ude)
     return user
 
 
