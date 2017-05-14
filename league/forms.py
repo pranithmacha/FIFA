@@ -20,7 +20,9 @@ class TournamentForm(forms.Form):
 
     def clean(self):
         # player_id_format = "player_{0}"
-        self.players = self.data.get("player_name", [])
+        # self.players = self.data.get("player_name", [])
+        self.players.append("xyz")
+        self.players.append("abc")
         # num_of_players = len(player_names)
         # for name in player_names:
         #     try:

@@ -98,7 +98,11 @@ def save_game_summary(request):
 
 
 def get_tournament_summary(request, tournament_id):
-    return render(request, "tournament_summary")
+    tournament = tournaments_manager.get_tournament_by_id(tournament_id)
+    summary = tournaments_manager.get_tournament_summary(tournament)
+    for sum in summary:
+        log.info(sum.player.username)
+    return render(request, "tournament_summary.html", {"summary": summary})
 
 
 def create_user(request):

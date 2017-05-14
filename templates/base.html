@@ -11,7 +11,7 @@
 <body ng-app="FifaApp" >
    <md-toolbar class="md-primary" style="background-color: black;" >
      <div layout="row">
-      <span class="md-toolbar-tools md-truncate"><span >FIFA Tournament League</span></span>
+         <span class="md-toolbar-tools md-truncate"><span ><a href="{% url 'home'%}">FIFA Tournament League</a></span></span>
         {% if user.is_authenticated %}
 
           <md-button flex="10" ng-href="" > <md-tooltip md-direction="bottom">Logged in as</md-tooltip> <md-icon class="material-icons">person</md-icon>{{user.username}}</md-button>

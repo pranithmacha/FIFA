@@ -1,6 +1,14 @@
 {% extends "base.html" %}
 
 {% block content %}
+
+{% for player_summary in summary %}
+    {{player_summary.player.username}}
+{{player_summary.played}} {{player_summary.won}}
+    {{player_summary.drawn}}  {{player_summary.lost}} {{player_summary.goals}}
+{{player_summary.points}}
+{% endfor %}
+
 <div ng-controller="tournamentContrl">
 	<br><br>
 <md-button ng-click="playMatch()">summary</md-button>
@@ -32,3 +40,4 @@
 </div>
 
 {% endblock %}
+

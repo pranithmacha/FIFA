@@ -3,6 +3,7 @@ app.controller('tournamentContrl',function($scope, $mdDialog){
 	$scope.hideTournament = false;
 	$scope.createTournament = false;
 	$scope.Matchlist=null;
+	$scope.Match ={};
     var num_players = 10;
 	//ng repeat value to be obtained
 	$scope.range = new Array(num_players);

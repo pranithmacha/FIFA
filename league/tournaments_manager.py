@@ -11,18 +11,22 @@ def create_tournament(tournament_name, tournament_type, number_of_games, players
         tournament = Tournament.objects.create(tournament_name=tournament_name,
                                                tournament_type=tournament_type,
                                                number_of_games=number_of_games,
-                                               players=players)
+                                               )
+        tournament.players = players
+        tournament.save()
         for player in players:
             TournamentSummary.objects.create(tournament=tournament, player=player)
-    except Exception:
+    except Exception as ex:
+        log.exception(ex)
         raise AttributeError
+    return tournament
 
 
 def get_tournaments_by_user(user_id, active=None):
     status = list()
     if active:
         status.append(1)
-    elif not status and status is not None:
+    elif not active and active is not None:
         status.append(0)
     else:
         status.append(1)
@@ -35,6 +39,15 @@ def get_tournament_by_name(tournament_name):
     tournament = None
     try:
         tournament = Tournament.objects.get(tournament_name=tournament_name)
+    except Tournament.DoesNotExist as e:
+        log.exception(e)
+    return tournament
+
+
+def get_tournament_by_id(tournament_id):
+    tournament = None
+    try:
+        tournament = Tournament.objects.get(pk=tournament_id)
     except Tournament.DoesNotExist as e:
         log.exception(e)
     return tournament
