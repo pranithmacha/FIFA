@@ -70,9 +70,12 @@ USE_L10N = True
 USE_TZ = True
 
 # STATIC FILES
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
-STATICFILES_DIRS = (os.path.join(BASE_DIR, 'staticfiles'),)
-STATIC_ROOT = os.path.join(BASE_DIR, 'prod_staticfiles')
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
+
 
 # logging configuration
 LOGGING = {
