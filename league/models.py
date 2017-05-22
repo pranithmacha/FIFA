@@ -39,11 +39,11 @@ class Team(models.Model):
 class GameSummary(models.Model):
     tournament = models.ForeignKey(Tournament)
     player_one = models.ForeignKey(User, related_name="player_one")
-    player_two = models.ForeignKey(User, related_name="player_two", default=None)
+    player_two = models.ForeignKey(User, related_name="player_two")
     player_one_goals = models.IntegerField(default=0)
     player_two_goals = models.IntegerField(default=0)
-    player_one_team = models.ForeignKey(Team, related_name="player_one_team")
-    player_two_team = models.ForeignKey(Team, related_name="player_two_team")
+    player_one_team = models.ForeignKey(Team, related_name="player_one_team", null=True)
+    player_two_team = models.ForeignKey(Team, related_name="player_two_team", null=True)
     result = models.CharField(max_length=200, blank=False, null=False)
 
 

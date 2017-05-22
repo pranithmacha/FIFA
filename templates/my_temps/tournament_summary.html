@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% for player_summary in summary %}
+    {{player_summary.player.username}}
+{{player_summary.played}} {{player_summary.won}}
+    {{player_summary.drawn}}  {{player_summary.lost}} {{player_summary.goals}}
+{{player_summary.points}}
+{% endfor %}
+
+<div ng-controller="tournamentContrl">
+	<br><br>
+<md-button ng-click="playMatch()">summary</md-button>
+<md-button ng-click="showPrompt($event)">Results</md-button>
+<md-whiteframe class="md-whiteframe-4dp" layout="column" flex layout-margin>
+   		<div layout="column" >
+   		<md-list>
+   			<md-list-item layout="row" layout-wrap>
+   				<p flex class="md-title">Name</p>
+   				<p flex class="md-title"> Played</p>
+   				<p flex class="md-title"> Won</p>
+   				<p flex class="md-title"> Draw</p>
+   				<p flex class="md-title"> Lost</p>
+                <p flex class="md-title"> Goals</p>
+   				<p flex class="md-title"> Points</p>
+   			</md-list-item>
+
+		</md-list>
+   		</div>
+   	</md-whiteframe>
+
+      <table class="table table-hover">
+    <thead>
+      <tr>
+          <th>Name</th>
+          <th>Played</th>
+          <th>Won</th>
+          <th>Drawn</th>
+          <th>Lost</th>
+          <th>Goals</th>
+          <th>Points</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for summary in tournament_summary %}
+      <tr>
+          <td>{{summary.player.username}}</td>
+          <td>{{summary.played}}</td>
+          <td>{{summary.won}}</td>
+          <td>{{summary.drawn}}</td>
+          <td>{{summary.lost}}</td>
+          <td>{{summary.goals}}</td>
+          <td>{{summary.points}}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<a href="{% url 'game_summary' tournament_id %}"> add game summary </a>
+
+{% endblock %}
+

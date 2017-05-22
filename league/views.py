@@ -2,8 +2,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from league.models import Tournament, Team
-from league.forms import RegistrationForm, TournamentForm
+from league.forms import RegistrationForm, TournamentForm, GameSummaryForm
 from league import tournaments_manager, user_manager
 import logging
 
@@ -24,7 +23,7 @@ def create_tournament(request):
     tournament_form = TournamentForm(request.POST, request=request)
     if tournament_form.is_valid():
         tournament_name = tournament_form.cleaned_data["tournament_name"]
-        tournament_type = tournament_form.cleaned_data["tournament_type"]
+        # tournament_type = tournament_form.cleaned_data["tournament_type"]
         number_of_games = tournament_form.cleaned_data["number_of_games"]
         player_names = tournament_form.players
         players = list()
@@ -45,7 +44,8 @@ def create_tournament(request):
             log.error("could not create tournament with name {0}".format(tournament_name))
             log.exception(e)
     else:
-        raise AttributeError("invalid form")
+        log.error("invalid form")
+        return render(request, "tournament.html", {"error": "invalid form"})
 
 
 @login_required
@@ -81,41 +81,43 @@ def register(request):
 
 
 @login_required
-def save_game_summary(request):
-    tournament_id = ""
-    player_one_username = ""
-    player_two_username = ""
-    team_one_id = ""
-    team_two_id = ""
-    try:
-        tournament = Tournament.objects.get(pk=tournament_id)
-        player_one = User.objects.get(username=player_one_username)
-        player_two = User.objects.get(username=player_two_username)
-        player_one_team = Team.objects.get(pk=team_one_id)
-        player_two_team = Team.objects.get(pk=team_two_id)
-    except Exception as e:
-        log.exception(e)
+def game_summary(request, tournament_id):
+    if request.method == "GET":
+        return render(request, "game_summary.html", {"tournament_id": tournament_id})
+    game_summary_form = GameSummaryForm(request.POST)
+    if game_summary_form.is_valid():
+        player_one_name = request.POST.get("player_one")
+        player_two_name = request.POST.get("player_two")
+        player_one_goals = request.POST.get("player_one_goals")
+        player_two_goals = request.POST.get("player_two_goals")
+        player_one = user_manager.get_user_by_username(player_one_name)
+        player_two = user_manager.get_user_by_username(player_two_name)
+        tournament = tournaments_manager.get_tournament_by_id(tournament_id)
+        tournaments_manager.save_game_summary(tournament, player_one, player_two,
+                                              player_one_goals, player_two_goals)
+        return redirect(reverse('get_tournament_summary', args=(tournament_id, )))
+    else:
+        log.error("invalid form")
+        return render(request, "game_summary.html", {"tournament_id": tournament_id})
 
 
+@login_required
 def get_tournament_summary(request, tournament_id):
     tournament = tournaments_manager.get_tournament_by_id(tournament_id)
     summary = tournaments_manager.get_tournament_summary(tournament)
     for sum in summary:
         log.info(sum.player.username)
-    return render(request, "tournament_summary.html", {"summary": summary})
+    return render(request, "tournament_summary.html", {"tournament_summary": summary,
+                                                       "tournament_id": tournament_id})
 
 
 def create_user(request):
+    # if request.method == "POST":
+    #
+    # user_manager.create_user(user_name=user_name, password=password,
+    #                          email=email)
     User.objects.create_user(username="abc", password="abc")
 
-
-"""
-{% for tournament in tournaments %}
-
-{{tournament.tournament_name}}
-
-{% endfor %}
-"""
 
 
 

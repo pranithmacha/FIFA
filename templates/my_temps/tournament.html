@@ -1,0 +1,153 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if form.errors %}
+<p>Your username and password didn't match. Please try again.</p>
+{% endif %}
+
+{% if next %}
+    {% if user.is_authenticated %}
+    <p>Your account doesn't have access to this page. To proceed,
+    please login with an account that has access.</p>
+    {% else %}
+    <p>Please login to see this page.</p>
+    {% endif %}
+{% endif %}
+
+
+
+ <!-- Contact Section -->
+
+    <section id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>Tournament</h2>
+                    <hr class="star-primary">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
+                    <!-- The form should work on most web servers, but if the form is not working you may need to configure your web server differently. -->
+                    <form name="sentMessage" id="contactForm" novalidate method="post"
+						  action="{% url 'create_tournament' %}">
+                        {% csrf_token %}
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <input type="text" class="form-control" placeholder="tournament name"
+									   name="tournament_name" id="id_tournament_name"
+                                       required data-validation-required-message="tournament name.">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <!--<div class="row control-group">-->
+                            <!--<div class="form-group col-xs-12 floating-label-form-group controls">-->
+                                <!--<input type="text" class="form-control" placeholder="tournament type"-->
+									   <!--name="tournament_type" id="id_tournament_type"-->
+                                       <!--required data-validation-required-message="tournament name.">-->
+                                <!--<p class="help-block text-danger"></p>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <input type="text" class="form-control" placeholder="number of games"
+									   name="number_of_games" id="id_password"
+                                       required data-validation-required-message="enter number of games per player.">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <input type="text" class="form-control" placeholder="player one"
+									   name="player_one" id="id_player_one"
+                                       required data-validation-required-message="enter player one.">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <input type="text" class="form-control" placeholder="player two"
+									   name="player_two" id="id_player_two"
+                                       required data-validation-required-message="enter player two.">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <input type="text" class="form-control" placeholder="player three"
+									   name="player_three" id="id_player_three"
+                                       required data-validation-required-message="enter player three.">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <input type="text" class="form-control" placeholder="player four"
+									   name="player_four" id="id_player_four"
+                                       required data-validation-required-message="enter player four.">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <input type="text" class="form-control" placeholder="player five"
+									   name="player_five" id="id_player_five"
+                                       required data-validation-required-message="enter player five.">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <input type="text" class="form-control" placeholder="player six"
+									   name="player_six" id="id_player_six"
+                                       required data-validation-required-message="enter player six.">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <input type="text" class="form-control" placeholder="player seven"
+									   name="player_seven" id="id_player_seven"
+                                       required data-validation-required-message="enter player seven.">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <input type="text" class="form-control" placeholder="player eight"
+									   name="player_eight" id="id_player_eight"
+                                       required data-validation-required-message="enter player eight.">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <input type="text" class="form-control" placeholder="player nine"
+									   name="player_nine" id="id_player_nine"
+                                       required data-validation-required-message="enter player nine.">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <input type="text" class="form-control" placeholder="player ten"
+									   name="player_ten" id="id_player_ten"
+                                       required data-validation-required-message="enter player ten.">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <div id="success"></div>
+                        <div class="row">
+                            <div class="form-group col-xs-12">
+                                <button type="submit" class="btn btn-success btn-lg">Create</button>
+                            </div>
+                             <input type="hidden" name="next" value="" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

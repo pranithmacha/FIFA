@@ -42,7 +42,7 @@
             <span>Please fill out the player <span ng-bind="$index+1"></span> details</span>
             <md-input-container flex="50">
 	         <label>Player Name</label>
-	         <input required name="player_name_[$index]" ng-model="Match.playerName[$index]">
+	         <input required name="player_name[$index]" ng-model="Match.playerName[$index]">
 	         <div ng-messages="MatchForm.leagueName.$error">
 	           <div ng-message="required">This is required.</div>
 	         </div>
