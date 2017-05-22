@@ -58,20 +58,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'fifa.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/1.8/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'fifa',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
-        'PORT': '5432',
-        'HOST': 'localhost',
-    }
-}
-
 # Internationalization
 LANGUAGE_CODE = 'en-us'
 
@@ -165,6 +151,22 @@ if ENV == "PROD":
     SECRET_KEY = os.environ.get("SECRET_KEY")
     DEBUG = os.environ.get("DEBUG") == "True"
     ALLOWED_HOSTS = [host for host in os.environ.get("ALLOWED_HOSTS").split(",")]
+    DB_NAME = os.environ.get("DB_NAME")
+    DB_USER = os.environ.get("DB_USER")
+    DB_PASSWORD = os.environ.get("DB_PASSWORD")
+    DB_HOST = os.environ.get("DB_HOST")
+    DB_PORT = os.environ.get("DB_PORT")
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': DB_NAME,
+        'USER': DB_USER,
+        'PASSWORD': DB_PASSWORD,
+        'PORT': DB_PORT,
+        'HOST': DB_HOST,
+    }
+}
 
 
 
