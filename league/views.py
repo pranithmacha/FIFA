@@ -5,12 +5,14 @@ from django.contrib.auth.models import User
 from league.forms import RegistrationForm, TournamentForm, GameSummaryForm
 from league import tournaments_manager, user_manager
 import logging
+from django.conf import settings
 
 log = logging.getLogger(__name__)
 
 
 @login_required
 def home(request):
+    print(settings.STATIC_ROOT)
     user_id = request.user.id
     tournaments = tournaments_manager.get_tournaments_by_user(user_id)
     return render(request, "home.html", {"tournaments": tournaments})
