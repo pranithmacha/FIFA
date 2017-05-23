@@ -78,6 +78,8 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
 
+print("static root is "+STATIC_ROOT)
+
 
 # logging configuration
 LOGGING = {
