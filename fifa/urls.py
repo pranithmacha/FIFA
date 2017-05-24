@@ -2,6 +2,7 @@ from django.conf.urls import url, include
 from django.contrib.auth import views as auth_views
 from league import views
 from django.conf import settings
+from django.views.static import serve
 
 urlpatterns = [
     url(r'^$', views.home, name='home'),
@@ -13,5 +14,5 @@ urlpatterns = [
 ]
 
 if not settings.DEBUG:
-    urlpatterns.append(url(r'^static/(?P<path>.*)$', 'django.views.static.serve',
+    urlpatterns.append(url(r'^static/(?P<path>.*)$', serve,
                        {'document_root': settings.STATIC_ROOT}))
