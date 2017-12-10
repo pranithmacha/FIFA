@@ -8,7 +8,7 @@ ENV = "PROD"
 SECRET_KEY = ''
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -77,9 +77,6 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
-
-print("static root is "+STATIC_ROOT)
-
 
 # logging configuration
 LOGGING = {

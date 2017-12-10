@@ -1,18 +1,15 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
 from league.forms import RegistrationForm, TournamentForm, GameSummaryForm
 from league import tournaments_manager, user_manager
 import logging
-from django.conf import settings
 
 log = logging.getLogger(__name__)
 
 
 @login_required
 def home(request):
-    print(settings.STATIC_ROOT)
     user_id = request.user.id
     tournaments = tournaments_manager.get_tournaments_by_user(user_id)
     return render(request, "home.html", {"tournaments": tournaments})
@@ -38,8 +35,11 @@ def create_tournament(request):
                 log.info("creating tournament with name {0}".format(tournament_name))
                 for user_name in player_names:
                     user = user_manager.get_user_by_username(user_name)
+                    if not user:
+                        raise AttributeError("could not find user {0}".format(user_name))
                     players.append(user)
                 tournament = tournaments_manager.create_tournament(tournament_name, tournament_type,
+
                                                                    number_of_games, players)
                 return redirect("get_tournament_summary", tournament_id=tournament.id)
         except AttributeError as e:
@@ -111,14 +111,6 @@ def get_tournament_summary(request, tournament_id):
         log.info(sum.player.username)
     return render(request, "tournament_summary.html", {"tournament_summary": summary,
                                                        "tournament_id": tournament_id})
-
-
-def create_user(request):
-    # if request.method == "POST":
-    #
-    # user_manager.create_user(user_name=user_name, password=password,
-    #                          email=email)
-    User.objects.create_user(username="abc", password="abc")
 
 
 
